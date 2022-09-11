@@ -1,7 +1,8 @@
-import {BeforeUpdate, Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {BeforeUpdate, Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn, Unique} from 'typeorm';
 import {User} from "./user.entity";
 
 @Entity('contact_list')
+@Unique(["email", "owner"])
 export class ContactList {
     @PrimaryGeneratedColumn()
     id: number;
@@ -19,10 +20,10 @@ export class ContactList {
     })
     lastName: string;
 
+
     @Column({
         name: 'email_address',
         nullable: false,
-        unique: true,
     })
     email: string;
 
@@ -58,6 +59,8 @@ export class ContactList {
 
     @Column({type: 'timestamp', nullable: true})
     deleted: Date;
+
+
 
 
 }
